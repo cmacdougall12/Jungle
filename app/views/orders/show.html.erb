@@ -9,6 +9,7 @@
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
       <tbody>
+        <% @order.line_items.each do |item| %>
             <%= render 'item', product: @products[item.product_id], item: item%>
         <% end %>
       </tbody>
