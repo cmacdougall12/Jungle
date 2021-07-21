@@ -4,8 +4,12 @@
     <h1>My Cart</h1>
   </header>
   <% if enhanced_cart.length == 0 %>
-  <div class="empty-cart">Your Cart is Currently Empty</div>
-  <%= link_to 'Return to Home', :root %>
+  <div class="bg-danger">
+  <h3>Your Cart is Currently Empty
+  </h3>
+  </div>
+  <h4><%= link_to 'Return to Home', :root %></h4>
+  
    <% end %>
   <% if enhanced_cart.length != 0 %>
   <div class="panel panel-default items">
