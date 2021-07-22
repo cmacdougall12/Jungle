@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  # add line below to a controller if you need to be logged in (LATER)
+  # before_filter :authorize
   def new
   end
 
