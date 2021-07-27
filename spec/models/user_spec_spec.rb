@@ -59,5 +59,63 @@ RSpec.describe User, type: :model do
     end
     
   end
+
+  describe '.authenticate_with_credentials' do
+    
+    it "user can log-in with proper credentials" do
+    existing_user = User.create!({
+      id: 1,
+      name: 'Cam',
+      email: 'a@a.com',
+      password: 'password',
+      password_confirmation: 'password'
+    })
+
+    user = User.authenticate_with_credentials('a@a.com', 'password')
+    expect(user.id).to eq(1)
+    end
+
+    it "user can not log-in with incorrect credentials" do
+      existing_user = User.create!({
+        id: 1,
+        name: 'Cam',
+        email: 'a@a.com',
+        password: 'password',
+        password_confirmation: 'password'
+      })
+  
+      user = User.authenticate_with_credentials('a@b.com', 'password')
+      expect(user).to eq(nil)
+      end
+
+      it "user can login if there is white space at the beginning or end" do
+        existing_user = User.create!({
+          id: 1,
+          name: 'Cam',
+          email: 'a@a.com',
+          password: 'password',
+          password_confirmation: 'password'
+        })
+    
+        user = User.authenticate_with_credentials('   a@a.com    ', 'password')
+        expect(user.id).to eq(1)
+        end
+
+
+      it "user can login sucessfully if wrong case is given in email" do
+        existing_user = User.create!({
+          id: 1,
+          name: 'Cam',
+          email: 'a@a.com',
+          password: 'password',
+          password_confirmation: 'password'
+        })
+    
+        user = User.authenticate_with_credentials('   A@A.com    ', 'password')
+        expect(user.id).to eq(1)
+        end
+      
+    
+  end
   
   end
